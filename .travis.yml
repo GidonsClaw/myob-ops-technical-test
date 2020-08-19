@@ -3,12 +3,12 @@ node_js:
   - 12
 script:
   - npm run test
-before_deploy:
+after_script:
   - npm pack
 deploy:
   - provider: releases
     api_key: "$GIT_TOKEN"
-    file: "*.tgz"
+    file: *.tgz
     skip_cleanup: true
   - provider: npm
     email: "$NPM_EMAIL"
