@@ -6,11 +6,9 @@ script:
 before_deploy:
   - npm pack
   - export RELEASE_PKG_FILE=$(ls *.tgz)
-  - echo "deploying $RELEASE_PKG_FILE to GitHub releases"
-deploy:
+ deploy:
   - provider: releases
     api_key: "$GIT_TOKEN"
-    file_glob: true
     file: "${RELEASE_PKG_FILE}"
     skip_cleanup: true
   - provider: npm
