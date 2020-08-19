@@ -3,10 +3,16 @@ node_js:
   - 12
 script:
   - npm run test
+before_deploy:
+  - npm pack
 deploy:
-  provider: npm
-  email: "$NPM_EMAIL"
-  api_key: "$NPM_API_TOKEN"
-  skip_cleanup: true
-  on: 
-    branch: master
+  - provider: releases
+    api_key: "$GIT_TOKEN"
+    file: "*.tgz"
+    skip_cleanup: true
+  - provider: npm
+    email: "$NPM_EMAIL"
+    api_key: "$NPM_API_TOKEN"
+    skip_cleanup: true
+    on: 
+      branch: master
